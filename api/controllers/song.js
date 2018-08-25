@@ -1,5 +1,6 @@
 const Song = require('../models/Song')
-
+const fs = require('fs')
+const path = require('path')
 exports.get_songs = (req, res) => {
     const albumId =  req.params.id
     let find = null
@@ -137,6 +138,61 @@ exports.remove_song = (req, res) => {
                     song: songRemoved
                 })
             }
+        }
+    })
+}
+exports.add_file = (req, res) => {
+    if (req.files) {
+        const songId = req.params.id
+        const file_path = req.files.file.path
+        const file_split = file_path.split('\/')[2]
+        const filename = file_split
+        const file_ext = filename.split('\.')[1]
+        if (file_ext == 'mp3' || file_ext == 'ogg') {
+            Song.findByIdAndUpdate(songId, {file : filename}, (err, songUpdated) => {
+                if (err) {
+                    return res.status(200).json({
+                        message: 'Error uploading the file',
+                        error: err
+                    })
+                }
+                else {
+                    if (!songUpdated) {
+                        res.status(404).json({
+                            message:'Song not found'
+                        })
+                    }
+                    else {
+                        res.status(200).json({
+                            song: songUpdated
+                        })
+                    }
+                }
+            })
+        }
+        else{
+            res.status(200).json({
+                message: 'File type not valid, only mp3 and ogg'
+            })
+        }
+    }
+    else {
+        res.status(200).json({
+            message: 'File not present in the request'
+        })
+    }
+}
+exports.get_file = (req, res) => {
+    const filename = req.params.filename
+    const path_file = `./uploads/songs/${filename}`
+    fs.exists(path_file, (exists) => {
+        if (exists) {
+            res.sendFile(path.resolve(path_file))
+        }
+        else {
+            res.status(404).json({
+                message:'File not found'
+            })
         }
     })
 }

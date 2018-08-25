@@ -1,9 +1,13 @@
 const express = require('express')
 const api = express.Router()
 const SongController = require('../controllers/song')
+const multipart = require('connect-multiparty')
+const md_files = multipart({uploadDir: './uploads/songs'})
 api.get('/:id?', SongController.get_songs)
 api.post('/', SongController.save_song)
 api.get('/:id/details', SongController.get_song)
 api.put('/:id', SongController.update_song)
 api.delete('/:id', SongController.remove_song)
+api.post('/add-file/:id', [md_files] ,SongController.add_file)
+api.get('/get-file/:filename', SongController.get_file)
 module.exports = api

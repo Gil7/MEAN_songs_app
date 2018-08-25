@@ -7,8 +7,9 @@ const artists_router = require('./api/routes/artist')
 const albums_router = require('./api/routes/album')
 const songs_router = require('./api/routes/song')
 //body parser config
-app.use(bodyParser.urlencoded({urlencoded : false}))
-app.use(bodyParser.json())
+
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false, parameterLimit: 10000 }));
 
 app.use('/uploads/users', express.static('uploads/users'))
 
