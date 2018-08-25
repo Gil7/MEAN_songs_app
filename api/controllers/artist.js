@@ -201,7 +201,7 @@ exports.add_image = (req, res) => {
                     }
                     else {
                         res.status(200).json({
-                            message: 'Image uploded correctly',
+                            message: 'Image uploaded correctly',
                             artist: artistUpdated
                         })
                     }
