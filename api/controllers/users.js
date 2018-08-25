@@ -171,7 +171,6 @@ exports.add_avatar = (req, res, next) => {
     if (req.files) {
         const userId = req.params.id
         const file_path = req.files.avatar.path
-        console.log(file_path)
         const file_split = file_path.split('\/')[2]
         const filename = file_split
         const file_ext = filename.split("\.")[1]
