@@ -9,5 +9,5 @@ api.post('/register', userController.save_user)
 api.post('/login', userController.login_user)
 api.put('/:id', middlewares.verify_auth, userController.update_user)
 api.put('/avatar/:id', [middlewares.verify_auth, md_files], userController.add_avatar)
-api.get('/get-image/:imagefile', userController.get_image_file)
+api.get('/get-image/:imagefile', middlewares.verify_auth ,userController.get_image_file)
 module.exports = api
