@@ -1,0 +1,10 @@
+const express = require('express')
+const api = express.Router()
+const AlbumController = require('../controllers/album')
+const middlewares =  require('../middlewares/check-auth')
+api.get('/:artist?', AlbumController.get_albums)
+api.post('/', AlbumController.save_album)
+api.get('/:id/details', middlewares.verify_auth ,AlbumController.get_album)
+api.put('/:id', middlewares.verify_auth ,AlbumController.update_album)
+api.delete('/:id', AlbumController.remove_album)
+module.exports = api
