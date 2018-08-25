@@ -3,6 +3,9 @@ const bodyParser = require('body-parser')
 const app = express()
 
 const users_router = require('./api/routes/users')
+const artists_router = require('./api/routes/artist')
+const albums_router = require('./api/routes/album')
+const songs_router = require('./api/routes/song')
 //body parser config
 app.use(bodyParser.urlencoded({urlencoded : false}))
 app.use(bodyParser.json())
@@ -23,5 +26,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api/users', users_router)
-
+app.use('/api/artists', artists_router)
+app.use('/api/albums', albums_router)
+app.use('/api/songs', songs_router)
 module.exports = app
