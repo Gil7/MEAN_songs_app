@@ -191,7 +191,8 @@ exports.add_avatar = (req, res, next) => {
                     else {
                         res.status(200).json({
                             message: 'Avatar uploaded correclty',
-                            user: userUpdated
+                            user: userUpdated,
+                            image: filenam
                         })
                     }
                 }
