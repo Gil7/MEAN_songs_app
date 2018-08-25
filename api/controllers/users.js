@@ -99,7 +99,7 @@ exports.save_user = (req, res, next) => {
     })
 }
 exports.login_user = (req, res, next) => {
-    
+    console.log(req.body)
     User
     .findOne({email: req.body.email}, (err, user) => {
         if (err) {
