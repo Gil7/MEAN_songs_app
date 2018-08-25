@@ -1,5 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const fs = require('fs')
+const path = require('path')
 const jwtservice = require('../services/jwt')
 exports.get_users = (req, res, next) => {
     User.find()
@@ -207,4 +209,19 @@ exports.add_avatar = (req, res, next) => {
             message: 'file is neccesary, valid extensions: png, jpg, gif'
         })
     }
+}
+exports.get_image_file = (req, res) => {
+    const image_file = req.params.imagefile
+
+    const path_image_file = `./uploads/users/${image_file}` 
+    fs.exists(path_image_file, (exists) => {
+        if (exists) {
+            res.sendFile(path.resolve(path_image_file))
+        }
+        else {
+            res.status(200).json({
+                message : 'File does not exists'
+            })
+        }
+    })
 }
