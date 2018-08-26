@@ -39,6 +39,7 @@ exports.save_user = (req, res, next) => {
     .then(result => {
         if (result.length > 0) {
             return res.status(409).json({
+                success: false,
                 message: 'Email already exists.'
             })
         }
@@ -46,7 +47,8 @@ exports.save_user = (req, res, next) => {
             bcrypt.hash(req.body.password,10, (err, hash) => {
                 if (err) {
                     return res.status(200).json({
-                        error: err
+                        error: err,
+                        success: false
                     })
                 }
                 if (req.body.email != null
@@ -62,18 +64,21 @@ exports.save_user = (req, res, next) => {
                     user.save((err, userStored) => {
                         if (err) {
                             res.status(500).json({
-                                error :err
+                                error :err,
+                                success: false
                             })
                         }
                         if (!userStored) {
                             res.status(401).json({
-                                message: 'Error saving user'
+                                message: 'Error saving user',
+                                success: false
                             })
                         }
                         else {
                             res.status(200).json({
                                 message: 'User created successfully',
-                                user : userStored
+                                user : userStored,
+                                success: true
                             })
                         }
                     } )
@@ -81,14 +86,16 @@ exports.save_user = (req, res, next) => {
                 }
                 else {
                     res.status(200).json({
-                        message: 'All fields are required'
+                        message: 'All fields are required',
+                        success: false
                     })
                 }
             })
         }
         else{
             res.status(200).json({
-                error: 'Password is required'
+                success: false,
+                message: 'Password is required'
             })
         }
     })
@@ -134,7 +141,7 @@ exports.login_user = (req, res, next) => {
                     }
                     else {
                         res.status(404).json({
-                            message: 'Login fails',
+                            message: 'Login fails, bad password',
                         })
                     }
                 })

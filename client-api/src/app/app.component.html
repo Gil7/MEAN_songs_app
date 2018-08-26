@@ -5,62 +5,87 @@
 </div>
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
+    <i class="fa fa-user"></i> {{identity.name}} 
 </div>
 
-<div *ngIf="!identity" class="col col-lg-12 row">
-  <div class="col col-lg-6">
-    <h2>
-    	<i class="fa fa-id-card"></i>
-    	Login
-	</h2>
+<div *ngIf="!identity" class="col col-lg-12 mt-4">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" (click)="changeForm(true)" href="#">Sign in</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="changeForm(false)" href="#">Sign up</a>
+        </li>
+    </ul>
     <div *ngIf="errorMessage">
         <div class="alert alert-info" role="alert">
           {{errorMessage}}
         </div>
     </div>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-    	<div class="form-group">
-    		<label for="">Email</label>
-    		<input type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="user.email" required>
-    		<span *ngIf="!email.valid && email.touched">
-    			Email required
-    		</span>
-    	</div>
-    	<div class="form-group">
-    		<label for="">Password</label>
-    		<input type="password" class="form-control" #password="ngModel" name="password" [(ngModel)]="user.password" required>
-    	</div>
-    	<button class="btn btn-primary" type="submit">
-    		Login 
-			<i class="fa fa-sign-in-alt"></i>
-    	</button>
-    </form>
+    <div class="col-xs-12 col-md-offset-3 col-md-6" *ngIf="inLogin">
+        <h2>
+        	<i class="fa fa-id-card"></i>
+        	Login
+    	</h2>
+        
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        	<div class="form-group">
+        		<label for="">Email</label>
+        		<input type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="user.email" required>
+        		<span class="text-info" *ngIf="!email.valid && email.touched">
+        			Email required
+        		</span>
+        	</div>
+        	<div class="form-group">
+        		<label for="">Password</label>
+        		<input type="password" class="form-control" #password="ngModel" name="password" [(ngModel)]="user.password" required>
+                <span class="text-info" *ngIf="!password.valid && password.touched">
+                    Password required
+                </span>
+        	</div>
+        	<button class="btn btn-primary" type="submit">
+        		Login 
+    			<i class="fa fa-sign-in-alt"></i>
+        	</button>
+        </form>
   </div>
-  <div class="col col-lg-6">
+  <div class="col col-lg-6" *ngIf="!inLogin">
     <h2>
-    	<i class="fa fa-file-signature"></i>
+    	<i class="fa fa-user-plus"></i>
     	Create your account
     </h2>
-    <form action="">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()">
     	<div class="form-group">
     		<label for="">Name</label>
-    		<input type="text" class="form-control" required="">
+    		<input type="text" name="name" #name="ngModel" class="form-control" [(ngModel)]="user_register.name" required="">
+            <span class="text-info" *ngIf="!name.valid && name.touched">
+                Name required
+            </span>
     	</div>
     	<div class="form-group">
     		<label for="">Username</label>
-    		<input type="text" class="form-control" required>
+    		<input type="text" #username="ngModel" name="username" [(ngModel)]="user_register.username" class="form-control" required="true">
+            <span class="text-info" *ngIf="!username.valid && username.touched">
+                Username required
+            </span>
     	</div>
     	<div class="form-group">
     		<label for="">Email</label>
-    		<input type="text" class="form-control" required>
+    		<input type="email" #email="ngModel" [(ngModel)]="user_register.email" name="email" class="form-control" required="true">
+            <span class="text-info" *ngIf="!email.valid && email.touched">
+                Email required
+            </span>
     	</div>
     	<div class="form-group">
     		<label for="">Password</label>
-    		<input type="password" class="form-control" required>
+    		<input type="password" name="password" #password="ngModel" [(ngModel)]="user_register.password" class="form-control" required="true">
+            <span class="text-info" *ngIf="!password.valid && password.touched">
+                Password required
+            </span>
     	</div>
 		<button class="btn btn-success" type="submit">
 			Create account 
-			<i class="fa fa-user-plus"></i>
+			<i class="fa fa-check"></i>
 		</button>
     </form>
   </div>

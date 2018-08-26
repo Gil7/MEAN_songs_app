@@ -25,6 +25,11 @@ export class UserService{
 		return this._http.post(`${this.url}users/login`, params, httpOptions)
 			.pipe(map(res => res));
 	}
+	signup(new_user){
+		const params = JSON.stringify(new_user)
+		return this._http.post(`${this.url}users/register`, params, httpOptions)
+		.pipe(map(res => res));
+	}
 	getIdentity(){
 		const identity = JSON.parse(localStorage.getItem('identity'))
 		if(identity != undefined) {
