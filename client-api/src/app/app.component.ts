@@ -15,11 +15,10 @@ export class AppComponent implements OnInit{
   ngOnInit(){
   	this.identity = this._userService.getIdentity();
   	this.token = this._userService.getToken();
-  	console.log(this.token)
-  	console.log(this.identity)
   }
   constructor(private _userService: UserService){
     this.user = new User('', '', '', '', '', 'ROLE_USER', '')
+    
   }
   onSubmit(){
   	this._userService.singin(this.user).subscribe(response => {
@@ -53,4 +52,9 @@ export class AppComponent implements OnInit{
   		
   	})
   }
+ 	logoutUser(){
+		localStorage.clear()
+		this.identity = null
+		this.token = null
+	}
 }

@@ -1,5 +1,6 @@
 <div *ngIf="identity" class="navigation col-lg-1">
   <h1>{{title}}</h1>
+  <button (click)="logoutUser()" class="btn btn-danger"> Logout <i class="fa fa-sign-out-alt"></i></button>
   <p>Estas logueado en la aplicacion</p>
 </div>
 <div class="clearfix"></div>
