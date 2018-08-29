@@ -30,6 +30,9 @@ export class EditComponent implements OnInit {
     },
     error =>{
       console.log(error)
+      if (error.error.message != undefined) {
+          this.message = error.error.message
+      }
     })
   }
 

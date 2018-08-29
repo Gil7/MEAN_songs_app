@@ -82,7 +82,7 @@ exports.save_user = (req, res, next) => {
                             })
                         }
                     } )
-                    
+
                 }
                 else {
                     res.status(200).json({
@@ -116,14 +116,14 @@ exports.login_user = (req, res, next) => {
             })
         }
         else {
-            
+
             if (!user) {
                 res.status(404).json({
                     message: `This user doesn't exists`,
                 })
             }
             else {
-                
+
                 bcrypt.compare(req.body.password, user.password, (err, check) => {
                     if (check) {
                         if (req.body.gethash) {
@@ -152,6 +152,11 @@ exports.login_user = (req, res, next) => {
 exports.update_user = (req, res, next) => {
     const userId = req.params.id
     const newData = req.body
+    if (userId == req.user.sub) {
+      return res.status(403).json({
+        message: `You don't have permissions to update this user`
+      })
+    }
     User.findByIdAndUpdate(userId, newData, (err, userUpdated) => {
         if (err) {
             return res.status(500).json({
@@ -220,7 +225,7 @@ exports.add_avatar = (req, res, next) => {
 exports.get_image_file = (req, res) => {
     const image_file = req.params.imagefile
 
-    const path_image_file = `./uploads/users/${image_file}` 
+    const path_image_file = `./uploads/users/${image_file}`
     fs.exists(path_image_file, (exists) => {
         if (exists) {
             res.sendFile(path.resolve(path_image_file))
