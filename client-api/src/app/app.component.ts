@@ -31,7 +31,6 @@ export class AppComponent implements OnInit{
   			alert("this user has been not loguedin correctly")
   		}
   		else {
-  			const userjson = JSON.stringify(this.identity)
   			//get token
   			this._userService.singin(this.user, 'true').subscribe(response => {
   				this.token = response.token			
@@ -40,7 +39,8 @@ export class AppComponent implements OnInit{
   				}
   				else {
   					localStorage.setItem('identity', JSON.stringify(this.identity))
-  					localStorage.setItem('jwttoken', this.token)
+					localStorage.setItem('jwttoken', this.token)
+					this.user = new User('', '', '', '', '', 'ROLE_USER', '')
   				}
   			},
   			error => {
@@ -67,13 +67,13 @@ export class AppComponent implements OnInit{
 	onSubmitRegister(){
 		
 		this._userService.signup(this.user_register).subscribe(response => {
-			console.log(response)
 			if(response.success) {
 				this.inLogin = true
 				this.errorMessage = "User created, its time to signig to the firt time :)"
 			}
 			else{
 				this.errorMessage = response.message
+				
 			}
 		},
 		error => {

@@ -33,7 +33,13 @@ export class UserService{
 	updateUser(user_to_update){
 		const params = JSON.stringify(user_to_update)
 		httpOptions.headers.append('Authorization', this.token)
-		return this._http.put(`${this.url}users/${user_to_update._id}`, params, httpOptions)
+    const headersWithToken = {
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      })
+    }
+		return this._http.put(`${this.url}users/${user_to_update._id}`, params, headersWithToken)
 		.pipe(map(res => res));
 	}
 	getIdentity(){
@@ -56,5 +62,5 @@ export class UserService{
 		}
 		return this.token;
 	}
-	
+
 }
