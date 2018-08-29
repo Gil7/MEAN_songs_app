@@ -152,7 +152,7 @@ exports.login_user = (req, res, next) => {
 exports.update_user = (req, res, next) => {
     const userId = req.params.id
     const newData = req.body
-    if (userId == req.user.sub) {
+    if (userId != req.user.sub) {
       return res.status(403).json({
         message: `You don't have permissions to update this user`
       })

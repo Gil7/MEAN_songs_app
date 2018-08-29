@@ -27,6 +27,13 @@ export class EditComponent implements OnInit {
   onSubmit(){
     this._userService.updateUser(this.user).subscribe(response =>{
       this.message = response.message
+      if (!response.user) {
+        this.message = "Error! We cant update your information"
+      }
+      else {
+        this.message = response.message
+        localStorage.setItem('identity', JSON.stringify(this.user))
+      }
     },
     error =>{
       console.log(error)
