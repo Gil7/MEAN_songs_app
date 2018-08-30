@@ -42,6 +42,17 @@ export class UserService{
 		return this._http.put(`${this.url}users/${user_to_update._id}`, params, headersWithToken)
 		.pipe(map(res => res));
 	}
+  uploadPicture(file){
+    const fd = new FormData();
+    fd.append('avatar', file, file.name)
+    const headersWithToken = {
+      headers: new HttpHeaders({
+        'Authorization': this.token
+      })
+    }
+    return this._http.post(`${this.url}users/avatar/${this.identity._id}`, fd, headersWithToken)
+    .pipe(map(res => res));
+  }
 	getIdentity(){
 		const identity = JSON.parse(localStorage.getItem('identity'))
 		if(identity != undefined) {

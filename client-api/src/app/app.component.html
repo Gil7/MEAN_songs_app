@@ -1,13 +1,37 @@
-<div *ngIf="identity" class="navigation col-lg-1">
-  <h1>{{title}}</h1>
-  <button (click)="logoutUser()" class="btn btn-danger"> Logout <i class="fa fa-sign-out-alt"></i></button>
-  <p>Estas logueado en la aplicacion</p>
+
+  <div *ngIf="identity" class="navigation col-lg-1">
+  <h1 clas="head-title">
+    <a [routerLink]="['/']">
+      <i class="fa fa-music"></i>
+      {{title}}
+    </a>
+  </h1>
+
+  <nav class="navigation">
+    <a >
+      <i class="fa fa-search"></i>
+      Search
+    </a>
+    <a>
+      <i class="fa fa-star"></i>
+      Artists
+    </a>
+    <a>
+      <i class="fa fa-book"></i>
+      Albums
+    </a>
+    <a>
+      <i class="fa fa-user"></i>
+      Profile
+    </a>
+  </nav>
+  <!--button (click)="logoutUser()" class="btn btn-danger"> Logout <i class="fa fa-sign-out-alt"></i></button-->
+
 </div>
-<div class="clearfix"></div>
-<div *ngIf="identity" class="central col-lg-11">
-    <i class="fa fa-user"></i> {{identity.name}} 
+
+  <div *ngIf="identity" class="central col-lg-11">
+
     <router-outlet></router-outlet>
-    
 </div>
 
 <div *ngIf="!identity" class="col col-lg-12 mt-4">
@@ -29,7 +53,7 @@
         	<i class="fa fa-id-card"></i>
         	Login
     	</h2>
-        
+
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
         	<div class="form-group">
         		<label for="">Email</label>
@@ -46,7 +70,7 @@
                 </span>
         	</div>
         	<button class="btn btn-primary" type="submit">
-        		Login 
+        		Login
     			<i class="fa fa-sign-in-alt"></i>
         	</button>
         </form>
@@ -86,7 +110,7 @@
             </span>
     	</div>
 		<button class="btn btn-success" type="submit">
-			Create account 
+			Create account
 			<i class="fa fa-check"></i>
 		</button>
     </form>
