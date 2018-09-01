@@ -1,12 +1,13 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditComponent }  from './components/user/edit/edit.component';
 
+import { ArtistListComponent }  from './components/artist/artist-list/artist-list.component';
+import { EditComponent }  from './components/user/edit/edit.component';
 const appRoutes: Routes = [
     {
         path: '',
-        component: EditComponent
+        component: ArtistListComponent
     },
     {
         path:'profile',
