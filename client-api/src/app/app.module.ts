@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './components/user/edit/edit.component';
 import { routing, appRoutingProviders } from './app.routing';
 import { ArtistListComponent } from './components/artist/artist-list/artist-list.component';
+import { HomeComponent } from './components/home/home/home.component';
+import { CreateArtistComponent } from './components/artist/create-artist/create-artist.component';
 @NgModule({
   declarations: [
     AppComponent,
     EditComponent,
-    ArtistListComponent
+    ArtistListComponent,
+    HomeComponent,
+    CreateArtistComponent
   ],
   imports: [
     BrowserModule,

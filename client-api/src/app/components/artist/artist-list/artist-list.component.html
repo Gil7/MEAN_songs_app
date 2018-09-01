@@ -1,3 +1,7 @@
-<p>
-  {{title}}
-</p>
+<div class="col-lg-8 col-lg-offset-2">
+  <h2>Artists</h2>
+  <a href="#" class="btn btn-default" *ngIf="identity && identity.role == 'ROLE_USER'">
+    <i class="fa fa-plus"></i>
+    Register Artist
+  </a>
+</div>

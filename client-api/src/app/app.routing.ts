@@ -1,13 +1,18 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
+import { HomeComponent } from './components/home/home/home.component';
 import { ArtistListComponent }  from './components/artist/artist-list/artist-list.component';
 import { EditComponent }  from './components/user/edit/edit.component';
 const appRoutes: Routes = [
     {
         path: '',
-        component: ArtistListComponent
+        component: HomeComponent
+    },
+    {
+      path: 'artists/:page',
+      component: ArtistListComponent
+
     },
     {
         path:'profile',
@@ -15,7 +20,7 @@ const appRoutes: Routes = [
     },
     {
         path : '**',
-        component: EditComponent
+        component: HomeComponent
     }
 ]
 export const appRoutingProviders: any[] = [];

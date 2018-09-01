@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from "./models/user";
 import { UserService } from './services/user.service';
 @Component({
@@ -19,7 +20,10 @@ export class AppComponent implements OnInit{
   	this.token = this._userService.getToken();
   	this.inLogin = true;
   }
-  constructor(private _userService: UserService){
+  constructor(private _userService: UserService,
+      private _router: Router,
+      private _route: ActivatedRoute
+    ){
     this.user = new User('', '', '', '', '', 'ROLE_USER', '')
     this.user_register = new User('', '', '', '', '', 'ROLE_USER', '')
   }
@@ -33,7 +37,7 @@ export class AppComponent implements OnInit{
   		else {
   			//get token
   			this._userService.singin(this.user, 'true').subscribe(response => {
-  				this.token = response.token			
+  				this.token = response.token
   				if(this.token.lentgh <= 0) {
   					this.errorMessage = "Error in login(token)"
   				}
@@ -47,13 +51,13 @@ export class AppComponent implements OnInit{
   				this.errorMessage = error.error.message
   			})
   		}
-  	}, 
+  	},
   	error => {
   		this.errorMessage = error.error.message
   		if(this.errorMessage != null) {
   			console.log(error)
   		}
-  		
+
   	})
   }
   changeForm(value){
@@ -63,9 +67,10 @@ export class AppComponent implements OnInit{
 		localStorage.clear()
 		this.identity = null
 		this.token = null
+    .this._router.navigate(['/'])
 	}
 	onSubmitRegister(){
-		
+
 		this._userService.signup(this.user_register).subscribe(response => {
 			if(response.success) {
 				this.inLogin = true
@@ -73,7 +78,7 @@ export class AppComponent implements OnInit{
 			}
 			else{
 				this.errorMessage = response.message
-				
+
 			}
 		},
 		error => {
