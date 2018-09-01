@@ -26,9 +26,8 @@ export class ArtistListComponent implements OnInit {
     this.token = this._userService.getToken()
     this.identity = this._userService.getIdentity()
   }
-
   ngOnInit() {
-    this._artistService.getArtists()
+    this._artistService.getArtists(this.token)
     .subscribe(response => {
       console.log(response)
     },
