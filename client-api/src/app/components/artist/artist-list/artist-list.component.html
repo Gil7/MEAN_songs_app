@@ -5,3 +5,35 @@
     Register Artist
   </a>
 </div>
+<div class="clearfix">
+</div>
+<div class="row" *ngIf="identity">
+  <nav aria-label="Page navigation">
+    <ul class="pagination pull-right">
+      <li>
+        <a [routerLink]="['/artists', prev_page]" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/artists', next_page]" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="clearfix"></div>
+  <div class="col-sm-6 col-md-4" *ngFor="let artist of artists">
+    <div class="thumbnail">
+      <img [src]="loadPicture(artist.image)" *ngIf="artist.image != 'null'" alt="image" width="100px">
+      <div class="caption">
+        <h3>{{artist.name}}</h3>
+        <p>{{artist.description}}</p>
+        <p *ngIf="identity.role == 'ROLE_USER'">
+          <a [routerLink]="['/edit-artist',artist._id]" class="btn btn-warning" role="button">Edit <i class="fa fa-edit"></i></a>
+          <a href="#" class="btn btn-danger" role="button">Remove <i class="fa fa-trash"></i></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

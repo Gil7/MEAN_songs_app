@@ -16,6 +16,8 @@ export class ArtistListComponent implements OnInit {
   public token;
   public identity;
   public artists: Artist[];
+  public prev_page;
+  public next_page;
   constructor(private _userService: UserService,
     private _artistService: ArtistService,
     private _router: Router,
@@ -25,15 +27,43 @@ export class ArtistListComponent implements OnInit {
     this.url = GLOBAL.url,
     this.token = this._userService.getToken()
     this.identity = this._userService.getIdentity()
+    this.prev_page = 1;
+    this.next_page = 1;
   }
   ngOnInit() {
-    this._artistService.getArtists(this.token)
-    .subscribe(response => {
-      console.log(response)
-    },
-    error =>{
-      console.log(error)
+    this._route.params.forEach((params:Params) =>{
+      let page = +params['page']
+      if (!page) {
+          page = 1
+      }
+      else {
+        this.next_page = page + 1
+        this.prev_page = page -1
+        if (this.prev_page == 0) {
+            this.prev_page = 1
+        }
+      }
+      this._artistService.getArtists(page,this.token)
+      .subscribe(response => {
+        console.log(response)
+        if (!response.artists) {
+            this._router.navigate(['/'])
+        }
+        else {
+          this.artists = response.artists
+        }
+      },
+      error =>{
+        console.log(error)
+      })
     })
+
+  }
+  loadPicture(source){
+    if (source == null) {
+
+    }
+    return this._artistService.getUrlPicture(source);
   }
 
 }

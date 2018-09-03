@@ -1,6 +1,5 @@
 <h1>{{title}}</h1>
 <div class="alert alert-info" *ngIf="message">
-
   {{message}}
 </div>
 <form #formArtist="ngForm" (submit)="onSubmit()" class="col-lg-6">
@@ -9,19 +8,14 @@
     <input class="form-control" type="text" #name="ngModel" name="name" [(ngModel)]="artist.name">
     <span *ngIf="!name.valid && name.touched">Name is required</span>
   </div>
+
   <div class="form-group">
     <label for="">Description</label>
     <input class="form-control" type="text" #description="ngModel" name="description" [(ngModel)]="artist.description">
     <span *ngIf="!description.valid && description.touched">Description is required</span>
   </div>
-  <div class="form-group" *ngIf="is_edit">
-
-    <img width="150px" *ngIf="artist.image && artist.image != 'null'" [src]="getUrlPicture()" alt="">
-    <br>
-    <input type="file" (change)="loadFile($event)" #filename style="display:none">
-    <button type="button" class="btn btn-info" (click)="filename.click()" name="button">Pick file</button>
-  </div>
   <button type="submit" class="btn btn-primary" [disabled]="!formArtist.form.valid">
     Register <i class="fa fa-check"></i>
   </button>
+
 </form>

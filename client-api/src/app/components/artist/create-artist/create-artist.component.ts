@@ -16,6 +16,7 @@ export class CreateArtistComponent implements OnInit {
   public identity;
   public token;
   public message;
+  public is_edit;
   constructor(
     private _userService:UserService,
     private _artistService: ArtistService,
@@ -27,6 +28,7 @@ export class CreateArtistComponent implements OnInit {
     this.token = this._userService.getToken()
     this.identity = this._userService.getIdentity()
     this.message = null
+    this.is_edit = false
    }
 
   ngOnInit() {
@@ -47,5 +49,11 @@ export class CreateArtistComponent implements OnInit {
     error =>{
       this.message = "Error saving th artist"
     })
+  }
+  getUrlPicture(){
+    if (this.image == null) {
+        return ""
+    }
+    return this._artistService.getUrlPicture(this.artist.image)
   }
 }

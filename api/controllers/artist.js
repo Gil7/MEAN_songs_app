@@ -31,7 +31,7 @@ exports.get_artists = (req, res) => {
             }
         }
     })
-    
+
 }
 exports.save_artist = (req, res) => {
     const artist = new Artist()
@@ -161,7 +161,7 @@ exports.delete_artist = (req, res) => {
                                         })
                                     }
 
-                                    
+
                                 }
                             })
                         }
@@ -173,7 +173,7 @@ exports.delete_artist = (req, res) => {
                         }
                     }
                 })
-                
+
             }
         }
     })
@@ -206,7 +206,7 @@ exports.add_image = (req, res) => {
                         })
                     }
                 }
-            })            
+            })
         }
         else{
             res.status(200).json({
