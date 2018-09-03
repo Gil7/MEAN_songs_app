@@ -34,10 +34,8 @@ export class CreateArtistComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(){
-    console.log(this.artist)
     this._artistService.addArtist(this.token, this.artist)
     .subscribe(response =>{
-      console.log(response)
       if (!response.artist) {
           this.message = "Error saving th artist"
           this.artist = response.artist
