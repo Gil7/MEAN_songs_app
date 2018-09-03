@@ -18,6 +18,7 @@ export class ArtistListComponent implements OnInit {
   public artists: Artist[];
   public prev_page;
   public next_page;
+  public confirmado;
   constructor(private _userService: UserService,
     private _artistService: ArtistService,
     private _router: Router,
@@ -29,6 +30,7 @@ export class ArtistListComponent implements OnInit {
     this.identity = this._userService.getIdentity()
     this.prev_page = 1;
     this.next_page = 1;
+    this.confirm = null
   }
   ngOnInit() {
     this._route.params.forEach((params:Params) =>{
@@ -58,6 +60,22 @@ export class ArtistListComponent implements OnInit {
       })
     })
 
+  }
+  onRemoveConfirm(id){
+    this.confirm = id
+  }
+  cancelRemove(){
+    this.confirm = null
+  }
+  onRemoveArtist(id){
+    this._artistService.removeArtist(id, this.token).subscribe(
+      response => {
+        this._router.navigate(['/artists',1])
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
   loadPicture(source){
     if (source == null) {

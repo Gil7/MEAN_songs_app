@@ -9,6 +9,8 @@ import { ArtistListComponent } from './components/artist/artist-list/artist-list
 import { HomeComponent } from './components/home/home/home.component';
 import { CreateArtistComponent } from './components/artist/create-artist/create-artist.component';
 import { EditArtistComponent } from './components/artist/edit-artist/edit-artist.component';
+import { DetailArtistComponent } from './components/artist/detail-artist/detail-artist.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,8 @@ import { EditArtistComponent } from './components/artist/edit-artist/edit-artist
     ArtistListComponent,
     HomeComponent,
     CreateArtistComponent,
-    EditArtistComponent
+    EditArtistComponent,
+    DetailArtistComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,23 @@
+<div class="row" *ngIf="artist">
+  <div class="col-sm-6 col-md-8 col-md-offset-2">
+    <div class="thumbnail">
+      <img [src]="getUrlPicture()" alt="..." *ngIf="artist.image && artist.image != 'null'">
+      <div class="caption">
+        <h3>{{artist.name}}</h3>
+        <p>{{artist.description}}</p>
+
+        <p>
+          <a href="#" *ngIf="identity.role == 'ROLE_USER'" class="btn btn-primary">Add Album <i class="fa fa-plus"></i></a>
+          <a href="#" class="btn btn-success" role="button">
+            <i class="fa fa-book"></i>
+            Albums
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="" *ngIf="albums">
+
+  </div>
+</div>

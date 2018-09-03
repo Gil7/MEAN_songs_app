@@ -44,6 +44,7 @@ export class CreateArtistComponent implements OnInit {
       }
       else {
         this.message = response.message
+        this._router.navigate(['/artists', 1])
       }
     },
     error =>{

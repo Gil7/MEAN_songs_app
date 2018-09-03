@@ -57,11 +57,10 @@ export class ArtistService{
   removeArtist(id: string, token){
     const headersWithToken = {
       headers: new HttpHeaders({
-        'Authorization': token,
-        'Content-Type': 'application/json'
+        'Authorization': token
       })
     }
-    return this._http.delete(`${this.url}artist/${id}`, headersWithToken)
+    return this._http.delete(`${this.url}artists/${id}`, headersWithToken)
       .pipe(map(res =>res))
   }
   getUrlPicture(picture:string){

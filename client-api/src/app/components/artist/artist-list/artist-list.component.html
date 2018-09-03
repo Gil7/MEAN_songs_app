@@ -29,11 +29,17 @@
       <div class="caption">
         <h3>{{artist.name}}</h3>
         <p>{{artist.description}}</p>
+        <a class="text-info" [routerLink]="['/detail-artist',artist._id]">See details about this artist</a>
         <p *ngIf="identity.role == 'ROLE_USER'">
           <a [routerLink]="['/edit-artist',artist._id]" class="btn btn-warning" role="button">Edit <i class="fa fa-edit"></i></a>
-          <a href="#" class="btn btn-danger" role="button">Remove <i class="fa fa-trash"></i></a>
+          <a (click)="onRemoveConfirm(artist._id)" class="btn btn-danger" role="button">Remove <i class="fa fa-trash"></i></a>
         </p>
+      </div>
+      <div  *ngIf="confirm == artist._id">
+        <a (click)="onRemoveArtist(artist._id)" class="btn btn-sm btn-danger">Remove <i class="fa fa-check"></i></a>
+        <a (click)="cancelRemove()" class="btn btn-sm btn-default">Cancel <i class="fa fa-times"></i></a>
       </div>
     </div>
   </div>
+
 </div>
